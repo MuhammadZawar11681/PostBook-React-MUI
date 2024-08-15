@@ -9,6 +9,7 @@ import {
   TextField,
   Tooltip,
   Typography,
+  IconButton
 } from "@mui/material";
 import React, { useState } from "react";
 import {
@@ -18,13 +19,25 @@ import {
   Image,
   PersonAdd,
   VideoCameraBack,
+  Close as CloseIcon
 } from "@mui/icons-material";
 import { Box } from "@mui/system";
 
-const SytledModal = styled(Modal)({
+// Styled components
+const StyledModal = styled(Modal)({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+});
+
+const ModalContent = styled(Box)({
+  width: 400,
+  height: 350,
+  backgroundColor: "#fff",
+  color: "#000",
+  padding: 3,
+  borderRadius: 8,
+  boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
 });
 
 const UserBox = styled(Box)({
@@ -34,45 +47,48 @@ const UserBox = styled(Box)({
   marginBottom: "20px",
 });
 
+const IconButtonStyled = styled(IconButton)({
+  position: "absolute",
+  top: 10,
+  right: 10,
+});
+
 const Add = () => {
   const [open, setOpen] = useState(false);
+
   return (
     <>
       <Tooltip
-        onClick={(e) => setOpen(true)}
-        title="Delete"
+        onClick={() => setOpen(true)}
+        title="Create Post"
         sx={{
           position: "fixed",
           bottom: 20,
           left: { xs: "calc(50% - 25px)", md: 30 },
+          zIndex: 10,
         }}
       >
         <Fab color="primary" aria-label="add">
           <AddIcon />
         </Fab>
       </Tooltip>
-      <SytledModal
+      <StyledModal
         open={open}
-        onClose={(e) => setOpen(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
       >
-        <Box
-          width={400}
-          height={280}
-          bgcolor={"background.default"}
-          color={"text.primary"}
-          p={3}
-          borderRadius={5}
-          sx={{ display: 'flex' }}
-        >
-          <Typography variant="h6" color="gray" textAlign="center">
-            Create post
+        <ModalContent>
+          <IconButtonStyled onClick={() => setOpen(false)} color="inherit">
+            <CloseIcon />
+          </IconButtonStyled>
+          <Typography variant="h6" color="text.primary" textAlign="center">
+            Create Post
           </Typography>
           <UserBox>
             <Avatar
               src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              sx={{ width: 30, height: 30 }}
+              sx={{ width: 40, height: 40 }}
             />
             <Typography fontWeight={500} variant="span">
               John Doe
@@ -82,11 +98,12 @@ const Add = () => {
             sx={{ width: "100%" }}
             id="standard-multiline-static"
             multiline
-            rows={3}
+            rows={4}
             placeholder="What's on your mind?"
-            variant="standard"
+            variant="outlined"
+            fullWidth
           />
-          <Stack direction="row" gap={1} mt={2} mb={3}>
+          <Stack direction="row" gap={1} mt={2} mb={3} justifyContent="space-between">
             <EmojiEmotions color="primary" />
             <Image color="secondary" />
             <VideoCameraBack color="success" />
@@ -102,8 +119,8 @@ const Add = () => {
               <DateRange />
             </Button>
           </ButtonGroup>
-        </Box>
-      </SytledModal>
+        </ModalContent>
+      </StyledModal>
     </>
   );
 };
