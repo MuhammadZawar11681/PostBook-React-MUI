@@ -1,4 +1,5 @@
 import { Mail, Notifications, Pets } from "@mui/icons-material";
+import myAvatar from "../images/IMG_08111.jpg";
 import {
   AppBar,
   Avatar,
@@ -75,19 +76,19 @@ const Navbar = () => {
           {/* Changed placeholder color */}
         </Search>
         <Icons>
-          <Badge badgeContent={4} color="secondary">
+          <Badge badgeContent={7} color="secondary">
             {" "}
             {/* Changed badge color */}
             <Mail />
           </Badge>
-          <Badge badgeContent={2} color="secondary">
+          <Badge badgeContent={3} color="secondary">
             {" "}
             {/* Changed badge color */}
             <Notifications />
           </Badge>
           <Avatar
             sx={{ width: 36, height: 36, border: "2px solid #ffffff" }} // Added border to avatar
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src={myAvatar}
             onClick={(e) => setOpen(true)}
           />
         </Icons>

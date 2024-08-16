@@ -114,7 +114,7 @@ const Rightbar = () => {
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+            <Avatar alt="Travis Howard" src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
           </ListItemAvatar>
           <ListItemText
             primary="Summer BBQ"
@@ -136,7 +136,7 @@ const Rightbar = () => {
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+            <Avatar alt="Cindy Baker" src="https://material-ui.com/static/images/avatar/1.jpg" />
           </ListItemAvatar>
           <ListItemText
             primary="Oui Oui"

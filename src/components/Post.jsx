@@ -1,4 +1,5 @@
 import { Favorite, FavoriteBorder, MoreVert, Share } from "@mui/icons-material";
+import myAvatar from "../images/IMG_08111.jpg";
 import {
   Avatar,
   Card,
@@ -11,12 +12,13 @@ import {
   Typography,
 } from "@mui/material";
 
-const Post = () => {
+const Post = ({ text, image }) => {
   return (
     <Card sx={{ margin: 5, borderRadius: 2, boxShadow: 3 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: "teal" }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: "teal" }} aria-label="recipe" src={myAvatar}>
+            {/* This content inside the Avatar can be removed or kept as fallback */}
             J
           </Avatar>
         }
@@ -25,19 +27,35 @@ const Post = () => {
             <MoreVert />
           </IconButton>
         }
-        title={<Typography variant="h6" sx={{ fontWeight: 'bold' }}>John Doe</Typography>}
-        subheader={<Typography variant="body2" color="text.secondary">September 14, 2024</Typography>}
+        title={
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            Muhammad Zawar
+          </Typography>
+        }
+        subheader={
+          <Typography variant="body2" color="text.secondary">
+            September 14, 2024
+          </Typography>
+        }
       />
-      <CardMedia
-        component="img"
-        height="240"
-        image="https://images.pexels.com/photos/4534200/pexels-photo-4534200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        alt="Dish"
-        sx={{ borderTopLeftRadius: 2, borderTopRightRadius: 2 }}
-      />
+      {image && (
+  <CardMedia
+    component="img"
+    image={image}
+    alt="Post Image"
+    sx={{
+      borderTopLeftRadius: 2,
+      borderTopRightRadius: 2,
+      objectFit: "cover", // Ensures the image covers the area
+      width: "100%", // Makes sure the image takes up the full width
+      height: "auto", // Adjusts height to maintain the aspect ratio
+      maxHeight: 600, // Optional: you can set a max height to ensure very tall images don't take up too much space
+    }}
+  />
+)}
       <CardContent>
         <Typography variant="body1" color="text.primary">
-          This delicious paella is a fantastic party dish and a delightful meal to prepare with your guests. Feel free to add some frozen peas along with the mussels for extra flavor.
+          {text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

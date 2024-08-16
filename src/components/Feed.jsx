@@ -1,8 +1,9 @@
 import { Box, Stack, Skeleton } from "@mui/material";
 import React, { useState } from "react";
 import Post from "./Post";
+import image from "../images/StockCake-Excited Programmer Working_1723790801.jpg";
 
-const Feed = () => {
+const Feed = ({ posts }) => {
   const [loading, setLoading] = useState(true);
 
   setTimeout(() => {
@@ -20,12 +21,10 @@ const Feed = () => {
         </Stack>
       ) : (
         <>
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+          {posts.map((post, index) => (
+            <Post key={index} text={post.text} image={post.image} />
+          ))}
+          <Post text={"Excited Programmer Working"} image={image} />
         </>
       )}
     </Box>
