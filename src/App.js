@@ -1,12 +1,13 @@
 import Sidebar from "./components/Sidebar";
 import Feed from "./components/Feed";
 import Rightbar from "./components/Rightbar";
+import "./app.css";
 import {
   Box,
   createTheme,
-  Stack,
   ThemeProvider,
   CssBaseline,
+  useMediaQuery,
 } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Add from "./components/Add";
@@ -14,6 +15,7 @@ import { useState } from "react";
 
 function App() {
   const [mode, setMode] = useState("light");
+  const [posts, setPosts] = useState([]);
 
   const darkTheme = createTheme({
     palette: {
@@ -30,6 +32,12 @@ function App() {
     },
   });
 
+  const handleAddPost = (newPost) => {
+    setPosts([newPost, ...posts]);
+  };
+
+  const isMobile = useMediaQuery("(max-width:800px)");
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -37,67 +45,66 @@ function App() {
         bgcolor={"background.default"}
         color={"text.primary"}
         minHeight="100vh"
+        display="flex"
+        flexDirection="column"
       >
-        <Navbar />
-        <Stack
-          direction="row"
-          spacing={2}
-          justifyContent="space-between"
-          padding={2}
-        >
-          <Box
-            sx={{
-              width: 240,
-              height: `calc(100vh - 64px)`,
-              overflowY: "scroll",
-              position: "sticky",
-              top: 64,
-              flexShrink: 0,
-              "&::-webkit-scrollbar": {
-                display: "none",
-              },
-              "-ms-overflow-style": "none",
-              "scrollbar-width": "none",
-            }}
-          >
-            <Sidebar setMode={setMode} mode={mode} />
+        <Navbar mode={mode} setMode={setMode} />
+        <Box display="flex" flex={1} overflow="hidden">
+          <Box display="flex" flexDirection="row" overflow="hidden" flex={1}>
+            {!isMobile && (
+              <Box
+                sx={{
+                  width: 240,
+                  height: "calc(100vh - 64px)",
+                  overflowY: "scroll",
+                  position: "sticky",
+                  top: 64,
+                  flexShrink: 0,
+                  "&::-webkit-scrollbar": {
+                    display: "none",
+                  },
+                }}
+              >
+                <Sidebar mode={mode} setMode={setMode} />
+              </Box>
+            )}
+            <Box
+              flex={3}
+              sx={{
+                height: "calc(100vh - 64px)",
+                overflowY: "scroll",
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              }}
+            >
+              <Feed posts={posts} />
+            </Box>
+            {!isMobile && (
+              <Box
+                sx={{
+                  width: 310,
+                  height: "calc(100vh - 64px)",
+                  overflowY: "scroll",
+                  flexShrink: 0,
+                  "&::-webkit-scrollbar": {
+                    width: "8px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "#ccc",
+                    borderRadius: "8px",
+                  },
+                }}
+              >
+                <Rightbar />
+              </Box>
+            )}
           </Box>
-          <Box
-            flex={1}
-            sx={{
-              height: `calc(100vh - 64px)`,
-              overflowY: "scroll",
-              overflowX: "hidden",
-              "&::-webkit-scrollbar": {
-                display: "none",
-              },
-              "-ms-overflow-style": "none",
-              "scrollbar-width": "none",
-            }}
-          >
-            <Feed />
-          </Box>
-          <Box
-            sx={{
-              width: 300,
-              height: `calc(100vh - 64px)`,
-              overflowY: "scroll",
-              flexShrink: 0,
-              "&::-webkit-scrollbar": {
-                display: "none",
-              },
-              "-ms-overflow-style": "none",
-              "scrollbar-width": "none",
-            }}
-          >
-            <Rightbar />
-          </Box>
-        </Stack>
-        <Add />
+        </Box>
+        <Add onAddPost={handleAddPost} />
       </Box>
     </ThemeProvider>
   );
 }
-
 
 export default App;
