@@ -95,10 +95,10 @@ const Navbar = () => {
         <UserBox onClick={(e) => setOpen(true)}>
           <Avatar
             sx={{ width: 36, height: 36, border: "2px solid #ffffff" }} // Added border to avatar
-            src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            src={myAvatar}
           />
           <Typography variant="span" sx={{ fontWeight: "500" }}>
-            John
+            Muhammad Zawar
           </Typography>{" "}
           {/* Adjusted font weight */}
         </UserBox>
