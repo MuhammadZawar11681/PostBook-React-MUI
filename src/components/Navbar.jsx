@@ -98,7 +98,7 @@ const Navbar = () => {
             src={myAvatar}
           />
           <Typography variant="span" sx={{ fontWeight: "500" }}>
-            Muhammad Zawar
+            Zawar
           </Typography>{" "}
           {/* Adjusted font weight */}
         </UserBox>
